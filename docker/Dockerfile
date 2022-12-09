@@ -19,6 +19,7 @@ ENV SUPPRESS_NO_CONFIG_WARNING=1 \
 	NPM_BUILD_DATE="${BUILD_DATE}"
 
 RUN echo "fs.file-max = 65535" > /etc/sysctl.conf \
+    && echo 'APT::Cache-Limit "100000000";' > /etc/apt/apt.conf.d/70debconf \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends jq logrotate \
 	&& apt-get clean \
